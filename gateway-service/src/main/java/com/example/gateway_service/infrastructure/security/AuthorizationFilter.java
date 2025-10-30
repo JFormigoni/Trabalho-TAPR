@@ -22,12 +22,16 @@ import reactor.core.publisher.Mono;
 @Component
 public class AuthorizationFilter implements WebFilter {
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.secret}" )
     private String jwtSecret;
 
+    // Mapeamento de rotas e a menor role necessária para acessar
     private static final Map<String, RoleType> routeRoles = Map.of(
-        "/demo1/waiter", RoleType.WAITER,
-        "/demo1/customer", RoleType.CUSTOMER
+        "/product-service/admin", RoleType.ADMIN,
+        "/product-service/user", RoleType.USER,
+        "/order-service/admin", RoleType.ADMIN,
+        "/order-service/user", RoleType.USER,
+        "/order-service/guest", RoleType.GUEST
     );
 
     private boolean isAuthorized(String path, RoleType role) {
@@ -97,5 +101,5 @@ public class AuthorizationFilter implements WebFilter {
     return chain.filter(exchange);
    }
 
-    
+
 }

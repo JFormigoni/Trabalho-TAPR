@@ -1,11 +1,9 @@
 package com.example.gateway_service.domain.user.vo;
 
-
 public enum RoleType {
-    CUSTOMER(1),
-    WAITER(2),
-    CHEF(3),
-    ADMIN(4);
+    GUEST(1),
+    USER(2),
+    ADMIN(3);
 
     private final int level;
 
@@ -15,9 +13,5 @@ public enum RoleType {
 
     public boolean covers(RoleType other) {
         return this.level >= other.level;
-    }
-
-    public int getLevel() {
-        return this.level;
     }
 }
